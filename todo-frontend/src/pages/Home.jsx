@@ -5,11 +5,13 @@ import AddTodo from '../components/AddTodo'
 const Home = () => {
     const [flag, setFlag] = useState();
     return (
-        <>
-            <h1>Todo-Lite</h1>
-            <button className="homeBtn" onClick={() =>setFlag(!flag)}> {flag ? "Close Todo" : "Add Todo"}</button>
+        <div>
+            <div>
+                <h1>Todo-Lite</h1>
+                <button className="homeBtn" onClick={() => setFlag(!flag)}> {flag ? "Close Todo" : "Add Todo"}</button>
+            </div>
             {flag && <AddTodo />}
-        </>
+        </div>
     )
 }
 

@@ -11,14 +11,8 @@ import lombok.Data;
 @Data
 
 public class Todo {
-    @Id
-    @GeneratedValue
-    long id;
-    @NotBlank
-    @NotNull
-    String title;
-    @NotBlank
-    @NotNull
-    String description;
+    @Id @GeneratedValue long id;
+    @NotBlank @NotNull String title;
+    @NotBlank @NotNull String description;
     Boolean isCompleted;
 }

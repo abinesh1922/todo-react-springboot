@@ -30,7 +30,12 @@
     height: 2rem;
     margin-left: 35%;
   }
-  .list{
-    
+  .list {
+    display: flex;
+    flex-direction: column;
+    justify-content: cen;
+  }
+  .list div {
+    border-style: outset;
   }
 }

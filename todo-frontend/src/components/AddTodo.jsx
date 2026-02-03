@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import TodoList from './TodoList';
+import postData from '../service/Service'
 
 const AddTodo = () => {
 
@@ -7,11 +8,13 @@ const AddTodo = () => {
 
   const [todoList, setTodoList] = useState([]);
 
-  const [todo, setTodo] = useState("");
+  const [title, setTitle] = useState("");
 
-  const [discription, setDiscription] = useState("");
+  const [description, setDescription] = useState("");
 
-  const [time, setTime] = useState("")
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  const [data, setData] = useState({});
 
   const style = {
     fontSize: "20px"
@@ -19,42 +22,53 @@ const AddTodo = () => {
 
   const addToList = () => {
     setTodoList((prev) => [...prev, {
-      todo,
-      discription,
-      time
+      title,
+      description,
+      isCompleted
     }])
   }
 
   const changeflag = () => {
     setflag(!flag);
   }
-  const addTime = (e) => {
-    setTime(e.target.value)
-    console.log("Time: " + e.target.value);
+  const completed = () => {
+    setIsCompleted(!isCompleted)
+    console.log("Boolean: ", isCompleted);
   }
 
-  const addDiscription = (e) => {
-    setDiscription(e.target.value);
-    console.log("Discription: " + discription)
+  const addDescription = (e) => {
+    setDescription(e.target.value);
+    console.log("Description: " + description)
   }
 
-  const addTodo = (e) => {
-    setTodo(e.target.value);
-    console.log("Todo: " + todo);
+  const addTitle = (e) => {
+    setTitle(e.target.value);
+  }
+
+  const addData=()=>{
+    setData({
+      title,
+      description,
+      isCompleted
+    })
   }
 
   return (
-    <div className='add'>
-        <input style={style} placeholder='write your Todo' type='text' value={todo} onChange={(e) => addTodo(e)}></input>
-        <input placeholder='discription' type='text' value={discription} onChange={(e) => addDiscription(e)}></input>
-        <input type="datetime-local" onChange={(e) => addTime(e)} />
-        
-        <button onClick={(e) => { addToList(e), setFlag(!flag) }}>Add Task</button>
-        <div className='list'>
-          {flag && <TodoList todo={todoList} />}
-        </div>
+    <form className='add' style={{display:"flex",flexDirection: "row", gap:"2rem"}}>
 
-    </div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+
+        <input style={style} placeholder='write your Title' type='text' value={title} onChange={(e) => addTitle(e)}></input>
+
+        <input placeholder='description' type='text' value={description} onChange={(e) => addDescription(e)}></input>
+        
+        <input type="checkbox" onClick={() => completed()} />
+
+        <button onClick={(e) => { e.preventDefault(), addToList(e), addData(),  postData(data), console.log(data)}}>Add Task</button>
+      </div>
+      <TodoList todo={todoList} />
+
+    </form>
   )
 }
 
