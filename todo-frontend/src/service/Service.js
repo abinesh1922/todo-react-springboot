@@ -1,4 +1,4 @@
-const postData= async (payload)=>{
+export const postData= async (payload)=>{
     try{
         const response = await fetch(`http://localhost:8080/api/create`, {
             "method": "POST",
@@ -19,4 +19,16 @@ const postData= async (payload)=>{
     }
     
 }
-export default postData;
+
+export const getDataById= async (id)=>{
+    try{
+        const response = await fetch(`http://localhost:8080/api/${id}`)
+        const data = await response.json()
+        if(!response.ok){
+            console.log("errot", data)
+        }
+        return data
+    } catch(e){
+        throw(e)
+    }
+}

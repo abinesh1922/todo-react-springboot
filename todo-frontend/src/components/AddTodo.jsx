@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import TodoList from './TodoList';
-import postData from '../service/Service'
+import {postData} from '../service/Service'
 
 const AddTodo = () => {
 
@@ -14,7 +14,6 @@ const AddTodo = () => {
 
   const [isCompleted, setIsCompleted] = useState(false);
 
-  const [data, setData] = useState({});
 
   const style = {
     fontSize: "20px"
@@ -32,8 +31,8 @@ const AddTodo = () => {
     setflag(!flag);
   }
   const completed = () => {
-    setIsCompleted(!isCompleted)
-    console.log("Boolean: ", isCompleted);
+    setIsCompleted(!isCompleted);
+    console.log("Boolean: ", !isCompleted);
   }
 
   const addDescription = (e) => {
@@ -62,9 +61,17 @@ const AddTodo = () => {
 
         <input placeholder='description' type='text' value={description} onChange={(e) => addDescription(e)}></input>
         
-        <input type="checkbox" onClick={() => completed()} />
+        <input type="checkbox" checked={isCompleted} onClick={() => completed()} />
 
-        <button onClick={(e) => { e.preventDefault(), addToList(e), addData(),  postData(data), console.log(data)}}>Add Task</button>
+        <button onClick={(e) => { e.preventDefault()
+          addToList()
+          const data={
+            title,
+            description,
+            isCompleted
+          }
+          postData(data)
+          console.log(data)}}>Add Task</button>
       </div>
       <TodoList todo={todoList} />
 
