@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import TodoList from './TodoList';
 import {postData} from '../service/Service'
 
 const AddTodo = () => {
-
-  const [flag, setFlag] = useState();
 
   const [todoList, setTodoList] = useState([]);
 
@@ -13,7 +11,6 @@ const AddTodo = () => {
   const [description, setDescription] = useState("");
 
   const [isCompleted, setIsCompleted] = useState(false);
-
 
   const style = {
     fontSize: "20px"
@@ -27,14 +24,6 @@ const AddTodo = () => {
     }])
   }
 
-  const changeflag = () => {
-    setflag(!flag);
-  }
-  const completed = () => {
-    setIsCompleted(!isCompleted);
-    console.log("Boolean: ", !isCompleted);
-  }
-
   const addDescription = (e) => {
     setDescription(e.target.value);
     console.log("Description: " + description)
@@ -44,16 +33,8 @@ const AddTodo = () => {
     setTitle(e.target.value);
   }
 
-  const addData=()=>{
-    setData({
-      title,
-      description,
-      isCompleted
-    })
-  }
-
   return (
-    <form className='add' style={{display:"flex",flexDirection: "row", gap:"2rem"}}>
+    <form className='flex flex-col '>
 
       <div style={{ display: "flex", flexDirection: "column" }}>
 
@@ -61,11 +42,14 @@ const AddTodo = () => {
 
         <input placeholder='description' type='text' value={description} onChange={(e) => addDescription(e)}></input>
         
-        <input type="checkbox" checked={isCompleted} onClick={() => completed()} />
+        <input type="checkbox" checked={isCompleted} onChange={(e) => {
+          setIsCompleted(e.target.checked)
+          console.log(isCompleted)
+          }} />
 
         <button onClick={(e) => { e.preventDefault()
           addToList()
-          const data={
+          const data= {
             title,
             description,
             isCompleted
@@ -73,7 +57,10 @@ const AddTodo = () => {
           postData(data)
           console.log(data)}}>Add Task</button>
       </div>
-      <TodoList todo={todoList} />
+
+      <div className='bg-green-200 text-black'>
+        <TodoList todo={todoList} />
+      </div>
 
     </form>
   )

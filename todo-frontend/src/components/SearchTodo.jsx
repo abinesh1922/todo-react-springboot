@@ -27,12 +27,13 @@ const SearchTodo = () => {
     return (
         <>
             <form onSubmit={(e)=>showTodoById(e)}>
-                <label htmlFor='id'>Search</label>
-                <input type='text' id='id' value={id} placeholder='Todo-Id' onChange={(e)=>{
+
+                {/*Search By Id*/}
+                <input type='text' className='border' value={id} placeholder='Todo-Id' onChange={(e)=>{
                     setId(e.target.value)
                 }} />
 
-                <button type='submit'>Fetch Todo</button>
+                <button type='submit'>Search</button>
 
                 {loading && <p>Loading....</p>}
 
@@ -41,8 +42,7 @@ const SearchTodo = () => {
                         <h1>Id: {todo.id}</h1>
                         <h1>Title: {todo.title}</h1>
                         <h2>Description: {todo.description}</h2>
-                        <h3>status: {todo.isCompleted ? "completed" : "pending"}</h3>
-                        
+                        <h3>status: {todo.isCompleted ? "completed" : "pending"}</h3>   
                     </div>
                 )}
 
