@@ -1,0 +1,15 @@
+target/
+.git/
+.gitignore
+.maven/
+.mvn/
+*.md
+*.log
+.DS_Store
+.idea/
+*.iml
+.vscode/
+node_modules/
+.env
+.env.local
+docker-compose.override.yml
